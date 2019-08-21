@@ -1,0 +1,50 @@
+  // The function name is defined and the text from which we'll the most frequent word is defined
+function getTokens(rawString) {
+  // NB: `.filter(Boolean)` removes any falsy items from an array
+  //takes the string passed in as a parameter and converts it to lower case, 
+  regex makes sure to grab all words plus punctuation, then filters out falsy items, 
+  then sorts the array alphabetically so and then returns
+  
+  return rawString.toLowerCase().split(/[ ,!.";:-]+/).filter(Boolean).sort();
+}
+
+// Commands function to make array of the most frequent word
+function mostFrequentWord(text) {
+
+// Defines words as the text in rawString
+  let words = getTokens(text);
+  
+// The counter for the text in rawString
+  let wordFrequencies = {};
+  
+// Isolates the words in rawString
+  for (let i = 0; i <= words.length; i++) {
+    if (words[i] in wordFrequencies) {
+     
+// Adds up all the words in rawString by word
+      wordFrequencies[words[i]]++;
+      
+// If all words in the array are used the same amount of times, word Frequency = 1 and it will print out all the words
+    } else {
+      wordFrequencies[words[i]] = 1;
+    }
+  }
+  
+// The words which appear in the array
+  let currentMaxKey = Object.keys(wordFrequencies)[0];
+// The number of times a word appears in the array
+  let currentMaxCount = wordFrequencies[currentMaxKey];
+// Each word which was counted in the array
+
+  for (let word in wordFrequencies) {
+// A comparison of the counts of each word in the array if the, 
+word which appears most is greater than the current highest counted word, the new word become the currentMaxKey
+    if (wordFrequencies[word] > currentMaxCount) {
+// The number of times the word appeared in the array
+      currentMaxKey = word;
+      currentMaxCount = wordFrequencies[word];
+    }
+  }
+// currentMaxKey is the word that is most used
+  return currentMaxKey;
+}
